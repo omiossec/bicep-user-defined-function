@@ -1,0 +1,36 @@
+name: test managed identity
+
+on:
+  push:
+    branches: 
+      - main
+
+permissions:
+    id-token: write
+    contents: read 
+
+jobs:
+
+  test-identity:
+    name: run azure login
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: login
+        uses: azure/login@v2
+        with:
+          client-id: 69b06509-9fe7-463a-89aa-35be18dd6d80
+          tennant-id: c986548e-494d-4f3a-b716-42287a39531b
+          subscription-id: 2a21f4a3-c253-47fc-a05d-1c04de8ed626
+
+
+      - name: Deploy Bicep ex1
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: 2a21f4a3-c253-47fc-a05d-1c04de8ed626
+          resourceGroupName: demofunctionom
+          template: ./ex1.bicep
+          failOnStdErr: false
