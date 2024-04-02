@@ -23,16 +23,16 @@ jobs:
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
         with:
-          client-id: 69b06509-9fe7-463a-89aa-35be18dd6d80
-          tenant-id: c986548e-494d-4f3a-b716-42287a39531b
-          subscription-id:  2a21f4a3-c253-47fc-a05d-1c04de8ed626
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id:  ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
 
       - name: Deploy Bicep ex1
         uses: azure/arm-deploy@v1
         with:
-          subscriptionId: 2a21f4a3-c253-47fc-a05d-1c04de8ed626
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: demofunctionom
           template: ./ex1.bicep
           failOnStdErr: false
