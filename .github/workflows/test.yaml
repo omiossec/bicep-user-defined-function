@@ -19,12 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: login
-        uses: azure/login@v2
+
+      - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
+        uses: azure/login@v1
         with:
           client-id: 69b06509-9fe7-463a-89aa-35be18dd6d80
-          tennant-id: c986548e-494d-4f3a-b716-42287a39531b
-          subscription-id: 2a21f4a3-c253-47fc-a05d-1c04de8ed626
+          tenant-id: c986548e-494d-4f3a-b716-42287a39531b
+          subscription-id:  2a21f4a3-c253-47fc-a05d-1c04de8ed626
+          enable-AzPSSession: true
 
 
       - name: Deploy Bicep ex1
